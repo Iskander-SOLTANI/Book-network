@@ -1,28 +1,28 @@
 services:
   postgres:
-    container_name: postgres-sql-bsn
+    container_name: postgres-sql
     image: postgres:latest
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: skon
-      POSTGRES_DB: book_social
-      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: db_book_social
+      PGDATA: /var/lib/postgresql/data/db_pgdata
     volumes:
-      - postgres:/var/lib/postgresql/data/pgdata
+      - postgres:/var/lib/postgresql/data/db_pgdata
     ports:
       - "5432:5432"
     networks:
-      - spring-demo
+      - spring-project
     restart: unless-stopped
 
   mail-dev:
-    container_name: mail-dev-bsn
-    image: maildev/maildev
+    container_name: mail-dev_1
+    image: maildev_1/maildev-1
     ports:
       - "1080:1080"
       - "1025:1025"
     networks:
-      - spring-demo
+      - spring-project
 
 networks:
   spring-demo:

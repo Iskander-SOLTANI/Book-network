@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/book_social
+    url: jdbc:postgresql://localhost:5432/db_book_social
     username: postgres
     password: skon
     driver-class-name: org.postgresql.Driver
@@ -17,8 +17,8 @@ spring:
   mail:
     host: localhost
     port: 1025
-    username: ali
-    password: ali
+    username: skon
+    password: skon
     properties:
       mail:
         smtp:
@@ -35,3 +35,5 @@ spring:
       jwt:
         secret-key: qwertyuiopasdfghjklzxcvbnm123456
         expiration: 864000
+    mailing:
+      frontend-url: http://localhost:4200/activate-account
