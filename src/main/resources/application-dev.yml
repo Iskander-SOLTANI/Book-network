@@ -33,7 +33,7 @@ spring:
   application:
     security:
       jwt:
-        secret-key: qwertyuiopasdfghjklzxcvbnm123456
+        secret-key: KW6YutYp4TZ/6ev5CJpeLXHZU8vZ2m7nOdSCGVnP5bo=
         expiration: 864000
     mailing:
       frontend-url: http://localhost:4200/activate-account
