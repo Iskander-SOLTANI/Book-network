@@ -1,5 +1,7 @@
 package com.iskander.book_network.user;
 
+import com.iskander.book_network.book.Book;
+import com.iskander.book_network.history.BookTransactionHistory;
 import com.iskander.book_network.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
@@ -47,6 +49,13 @@ public class User implements Principal, UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Book> books;
+
+    @OneToMany(mappedBy = "user")
+    private List<BookTransactionHistory> bookTransactionHistories;
+
     @Override
     public String getName() {
         return "";

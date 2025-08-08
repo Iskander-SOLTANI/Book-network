@@ -96,8 +96,9 @@ public class AutehnticationService {
                 )
         );
         var claims = new HashMap<String, Object>();
+        // get the authentication user
         var user = ((User)auth.getPrincipal());
-        claims.put("userName", user.fullName());
+        claims.put("fullName", user.fullName());
         var jwt = jwtService.generateToken(claims,user);
         return AuthenticationResponse.builder().token(jwt).build();
     }
@@ -111,7 +112,7 @@ public class AutehnticationService {
             sendValidationEmail(savedToken.getUser());
             throw new RuntimeException("Token is expired, A new token has been sent to the same email address");
         }
-        var user = userRepository.findById(savedToken.getUser().getId())
+        var user = userRepository.findById(Long.valueOf(savedToken.getUser().getId()))
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         user.setEnabled(true);
         userRepository.save(user);
