@@ -2,6 +2,7 @@ package com.iskander.book_network.book;
 
 import com.iskander.book_network.common.PageResponse;
 import com.iskander.book_network.exception.OperationNotPermittedException;
+import com.iskander.book_network.file.FileStorgeService;
 import com.iskander.book_network.history.BookTransactionHistory;
 import com.iskander.book_network.history.BookTransactionHistoryRepository;
 import com.iskander.book_network.user.User;
@@ -13,10 +14,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +26,7 @@ public class BookService {
     private final BookRepository bookRepository;
     private final BookTransactionHistoryRepository bookTransactionHistoryRepository;
     private final BookMapper bookMapper;
+    private final FileStorgeService fileStorageService;
 
     public Long saveBook(BookRequest bookRequest, Authentication connectedUser) {
         User user = (User) connectedUser.getPrincipal();
@@ -190,5 +192,14 @@ public class BookService {
                 .orElseThrow(() -> new OperationNotPermittedException("This book is not returned yet . You cannot approved its returned "));
         bookTransactionHistory.setReturnedApproved(true);
         return bookTransactionHistoryRepository.save(bookTransactionHistory).getId();
+    }
+
+    public void uploadBookFilePicture(Long bookId, MultipartFile file, Authentication connectedUser) {
+        User user = (User) connectedUser.getPrincipal();
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new EntityNotFoundException("No book found with the id ::" + bookId));
+        var bookCover = fileStorageService.saveFile(file,user.getId());
+        book.setBookCover(bookCover);
+        bookRepository.save(book);
     }
 }

@@ -1,12 +1,14 @@
 package com.iskander.book_network.book;
 
 import com.iskander.book_network.common.PageResponse;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -99,6 +101,15 @@ public class BookController {
         return ResponseEntity.ok(bookService.updateReturnedApprovedStatus(bookId, connectedUser));
     }
 
-
+    @PostMapping(value = "cover/{book-id}", consumes = "multipart/form-data")
+    public ResponseEntity<?> uploadBookCover(
+            @PathVariable("book-id") Long bookId,
+            @Parameter()
+            @RequestPart("file") MultipartFile file,
+            Authentication connectedUser
+    ){
+        bookService.uploadBookFilePicture(bookId,file,connectedUser);
+        return ResponseEntity.accepted().build();
+    }
 
 }

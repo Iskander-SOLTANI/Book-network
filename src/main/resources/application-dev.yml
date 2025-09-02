@@ -37,3 +37,6 @@ spring:
         expiration: 864000
     mailing:
       frontend-url: http://localhost:4200/activate-account
+    file:
+      upload:
+        photos-output-path: ./uploads

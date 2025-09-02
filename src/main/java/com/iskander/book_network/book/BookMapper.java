@@ -1,5 +1,6 @@
 package com.iskander.book_network.book;
 
+import com.iskander.book_network.file.FileUtils;
 import com.iskander.book_network.history.BookTransactionHistory;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +28,7 @@ public class BookMapper {
                 .archived(book.isArchived())
                 .shareable(book.isShareable())
                 .owner(book.getOwner().fullName())
-                //To do implement this later
-                //.cover(book.getBookCover())
+                .cover(FileUtils.readFileFromLocation(book.getBookCover()))
                 .build();
     }
 
