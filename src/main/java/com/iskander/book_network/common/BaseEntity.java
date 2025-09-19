@@ -39,5 +39,5 @@ public class BaseEntity {
     private Long createdBy;
     @LastModifiedBy
     @Column(insertable = false)
-    private Integer updatedBy;
+    private Long updatedBy;
 }

@@ -14,8 +14,8 @@ public interface BookRepository extends JpaRepository<Book, Long> , JpaSpecifica
         select b
         from Book b
         where b.shareable = true
-        and b.archived = true
-        and b.owner != :userId
+        and b.archived = false
+        and b.createdBy != :userId
         """)
     Page<Book> findAllDisplayableBooks(Pageable pageable, Long userId);
 }

@@ -30,7 +30,18 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests -> {
                     authorizeRequests.requestMatchers(
-                            "/auth/**"
+                            "/auth/**",
+                            "/v2/api-docs",
+                            "/v1/api-docs",
+                            "/v3/api-docs",
+                            "/swagger-resources",
+                            "/swagger-resources/**",
+                            "/configuration/ui",
+                            "/configuration/security",
+                            "/webjars/**",
+                            "/swagger-ui.html",
+                            "/v3/api-docs/**",
+                            "/swagger-ui/**"
                     ).permitAll().anyRequest().authenticated();
                 })
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

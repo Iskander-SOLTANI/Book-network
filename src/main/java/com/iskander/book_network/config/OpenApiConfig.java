@@ -13,37 +13,38 @@ import io.swagger.v3.oas.annotations.servers.Server;
 @OpenAPIDefinition(
         info = @Info(
                 contact = @Contact(
-                        name = "iskander",
-                        email = "sol.iskander.dev@gmail.com"
+                        name = "Alibou",
+                        email = "contact@aliboucoding.com",
+                        url = "https://aliboucoding.com/course"
                 ),
-                description = "OpenApiDocumentation for spring boot security",
-                title = "OpenApiSpecification - iskander",
+                description = "OpenApi documentation for Spring Security",
+                title = "OpenApi specification - Alibou",
                 version = "1.0",
                 license = @License(
-                        name = "license name",
-                        url = "https//some-url.com"
+                        name = "Licence name",
+                        url = "https://some-url.com"
                 ),
                 termsOfService = "Terms of service"
         ),
         servers = {
                 @Server(
-                       description = "Local ENV",
+                        description = "Local ENV",
                         url = "http://localhost:8088/api/v1"
                 ),
                 @Server(
-                        description = " PROD ENV",
-                        url = "https://skoncoding.com/courses"
+                        description = "PROD ENV",
+                        url = "https://aliboucoding.com/course"
                 )
         },
         security = {
                 @SecurityRequirement(
-                        name = "bearerAuthentication"
+                        name = "bearerAuth"
                 )
         }
 )
 @SecurityScheme(
-        name = "bearerAuthentication",
-        description = "JWT auth description",
+        name = "bearerAuth",
+        description = "JWT authentication",
         scheme = "bearer",
         type = SecuritySchemeType.HTTP,
         bearerFormat = "JWT",

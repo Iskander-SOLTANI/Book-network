@@ -4,8 +4,8 @@ import jakarta.validation.constraints.*;
 
 public record FeedbackRequest(
         @Positive(message = "200")
-        @Max(message = "201" , value = 0)
-        @Min(message = "202", value = 5)
+        @Max(message = "201" , value = 5)
+        @Min(message = "202", value = 0)
         Double note,
 
         @NotEmpty(message = "203")
